@@ -98,4 +98,4 @@ plot_sd <- ggplot(df_sd, aes(x=alpha)) +
 print(plot_sd)
 
 # save(listPlotsArticle, custom_trans,
-#      df_sd, plot_sd, file="listPlots.RData")
+#      df_sd, plot_sd, vrai_alpha, vrai_beta, file="listPlots.RData")
