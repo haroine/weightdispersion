@@ -24,26 +24,26 @@ shinyServer(function(input, output) {
     if(input$scale) {
       currentPlot <- currentPlot +   scale_x_continuous(trans=custom_trans,
            breaks = c(500,1000,2000,5000,10000,20000)) +
-        ylim(c(0.85*vrai_alpha,vrai_alpha/0.85))
+        ylim(c(0.85*real_alpha,real_alpha/0.85))
     }
     
     print(currentPlot)
   })
   
-  output$plot_sd <- renderPlot({
+  output$plot_mse <- renderPlot({
     
     currentAlpha <- input$alpha
     # point_df <- data.frame(rep(currentAlpha,3),
-    #                        c(df_sd[df_sd$alpha==currentAlpha,c("sdmean_norm","sd95_norm","sdBeta_norm")]))
+    #                        c(df_mse[df_mse$alpha==currentAlpha,c("msemean_norm","mse95_norm","mseBeta_norm")]))
     # names(point_df)[1] <- "alpha"
     
-    plot_sd <- plot_sd +
-      # geom_point(data=point_df, aes(x=alpha,y=sdmean_norm)) +
-      # geom_point(data=point_df, aes(x=alpha,y=sd95_norm)) +
-      # geom_point(data=point_df, aes(x=alpha,y=sdBeta_norm)) +
+    plot_mse <- plot_mse +
+      # geom_point(data=point_df, aes(x=alpha,y=msemean_norm)) +
+      # geom_point(data=point_df, aes(x=alpha,y=mse95_norm)) +
+      # geom_point(data=point_df, aes(x=alpha,y=mseBeta_norm)) +
       geom_vline(xintercept = currentAlpha, size=1)
     
-    print(plot_sd)
+    print(plot_mse)
   })
   
 })

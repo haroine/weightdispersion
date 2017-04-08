@@ -24,6 +24,6 @@ shinyUI(pageWithSidebar(
   # Show a plot of the generated distribution
   mainPanel(
     plotOutput("plot_simus"),
-    plotOutput("plot_sd")
+    plotOutput("plot_mse")
   )
 ))
