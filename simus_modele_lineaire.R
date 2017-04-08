@@ -50,10 +50,10 @@ for(k in 1:N_simus_models) {
 
 
 
-## Plot of the model
+# ## Plot of the model
 # plot_lm <- ggplot(df, aes(x=X, y=Y)) +
 #   geom_point() +
-#   geom_abline(slope = vrai_beta, intercept = vrai_alpha)
+#   geom_abline(slope = real_beta, intercept = real_alpha)
 # 
 # print(plot_lm)
 
@@ -68,7 +68,7 @@ inverse = function(x) {
 ## Plot the model, scaled
 # plot_lm_scaled <- ggplot(df, aes(x=X, y=Y)) +
 #   geom_point() +
-#   geom_abline(slope = vrai_beta, intercept = vrai_alpha) +
+#   geom_abline(slope = real_beta, intercept = real_alpha) +
 #   scale_x_continuous(trans=custom_trans, 
 #                      breaks = c(500,1000,2000,5000,10000,20000))
 # 
@@ -78,7 +78,6 @@ inverse = function(x) {
 
 listPlotsArticle <- list()
 points <- seq(0,1,by=0.05)
-# points <- seq(0,1,by=0.5)
 
 
 for(k in 1:length(points)) {
@@ -106,14 +105,14 @@ df_mse$mse95_norm <- df_mse$mse95 / max(df_mse$mse95)
 df_mse$mseAlpha_norm <- df_mse$mseAlpha / max(df_mse$mseAlpha)
 df_mse$mseBeta_norm <- df_mse$mseBeta / max(df_mse$mseBeta)
 
-names(df_mse)[1] <- "alpha"
+names(df_mse)[1] <- "mu"
 
 currentAlpha <- 0.2
 point_df <- data.frame(rep(currentAlpha,3),
      c(df_mse[df_mse$alpha==currentAlpha,c("msemean_norm","mse95_norm","mseBeta_norm")]))
-names(point_df)[1] <- "alpha"
+names(point_df)[1] <- "mu"
 
-plot_mse <- ggplot(df_mse, aes(x=alpha)) +
+plot_mse <- ggplot(df_mse, aes(x=mu)) +
   geom_point(aes(y=msemean_norm, colour="mean")) +
   geom_point(aes(y=mse95_norm, colour="q95")) +
   geom_point(aes(y=mseBeta_norm, colour="beta1")) +
