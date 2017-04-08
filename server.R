@@ -27,7 +27,7 @@ shinyServer(function(input, output) {
         ylim(c(0.85*real_alpha,real_alpha/0.85))
     }
     
-    plot(currentPlot)
+    print(currentPlot)
   })
   
   output$plot_mse <- renderPlot({
@@ -43,7 +43,7 @@ shinyServer(function(input, output) {
       # geom_point(data=point_df, aes(x=alpha,y=mseBeta_norm)) +
       geom_vline(xintercept = currentAlpha, size=1)
     
-    plot(plot_mse)
+    print(plot_mse)
   })
   
 })
