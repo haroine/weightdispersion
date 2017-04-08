@@ -114,6 +114,9 @@ point_df <- data.frame(rep(currentAlpha,3),
 names(point_df)[1] <- "alpha"
 
 plot_mse <- ggplot(df_mse, aes(x=alpha)) +
+  # geom_point(aes(y=msemean_norm, colour="mean")) +
+  # geom_point(aes(y=mse95_norm, colour="q95")) +
+  # geom_point(aes(y=mseBeta_norm, colour="beta")) +
   geom_smooth(aes(y=msemean_norm, colour="mean"),se=0) +
   geom_smooth(aes(y=mse95_norm, colour="q95"),se=0) +
   geom_smooth(aes(y=mseBeta_norm, colour="beta"),se=0) +
