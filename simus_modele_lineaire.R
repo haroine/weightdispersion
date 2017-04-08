@@ -114,14 +114,17 @@ point_df <- data.frame(rep(currentAlpha,3),
 names(point_df)[1] <- "alpha"
 
 plot_mse <- ggplot(df_mse, aes(x=alpha)) +
-  # geom_point(aes(y=msemean_norm, colour="mean")) +
-  # geom_point(aes(y=mse95_norm, colour="q95")) +
-  # geom_point(aes(y=mseBeta_norm, colour="beta")) +
+  geom_point(aes(y=msemean_norm, colour="mean")) +
+  geom_point(aes(y=mse95_norm, colour="q95")) +
+  geom_point(aes(y=mseBeta_norm, colour="beta1")) +
+  geom_point(aes(y=mseAlpha_norm, colour="beta0")) +
   geom_smooth(aes(y=msemean_norm, colour="mean"),se=0) +
   geom_smooth(aes(y=mse95_norm, colour="q95"),se=0) +
-  geom_smooth(aes(y=mseBeta_norm, colour="beta"),se=0) +
+  geom_smooth(aes(y=mseBeta_norm, colour="beta1"),se=0) +
+  geom_smooth(aes(y=mseAlpha_norm, colour="beta0"),se=0) +
   ylab("Standard error (as percent of max)") +
-  scale_color_manual(values=c("beta"="forestgreen","mean"="red","q95"="blue")) +
+  scale_color_manual(values=c("beta1"="aquamarine","mean"="red",
+                              "q95"="blue","beta0"="aquamarine4")) +
   guides(colour=guide_legend(title=NULL))
 
 print(plot_mse)
