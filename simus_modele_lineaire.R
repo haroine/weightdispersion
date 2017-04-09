@@ -79,7 +79,6 @@ inverse = function(x) {
 listPlotsArticle <- list()
 points <- seq(0,1,by=0.05)
 
-
 for(k in 1:length(points)) {
   print(paste(k,"-",points[k]))
   listPlotsArticle[[k]] <- graph_mixte_model(points[k], df, nSimus=nSim_design)

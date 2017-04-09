@@ -81,13 +81,11 @@ plot_pps_sims_model <- ggplot(df_reduced, aes(x=X, y=Y, colour=sampled)) +
               colour="red", linetype="dashed") +
   # geom_vline(xintercept=c(X_mean_1,X_mean_2),
   #            colour="blue", linetype="dashed") +
-  # geom_vline(xintercept=X_mean_2, colour="blue", linetype="dashed") +
-  # geom_vline(xintercept=X_q95_1, colour="blue", linetype="dashed") +
   # geom_vline(xintercept=c(X_q95_1,X_q95_2),
   #            colour="blue", linetype="dashed") +
   # geom_vline(xintercept=real_X_mean, colour="blue") +
   # geom_vline(xintercept=real_X_q95, colour="blue") +
-  scale_color_continuous(low="#ffffff", high = "#ff0000")
+  scale_color_continuous(low="mistyrose", high = "#ff0000", limits=c(0,0.65))
   # ylim(c(0.85*vrai_alpha,vrai_alpha/0.85))
   # scale_x_continuous(trans=custom_trans, 
   #                    breaks = c(500,1000,2000,5000,10000,20000))
