@@ -1,4 +1,5 @@
 
+## TODO: alpha is now named mu
 ## Under the model probability
 graph_mixte_model <- function(alpha, df, nSimus=1000) {
   
