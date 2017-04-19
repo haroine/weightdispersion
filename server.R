@@ -10,29 +10,16 @@ shinyServer(function(input, output) {
     currentList <- listPlotsArticle[[indexList]]
     currentPlot_data <- currentList$plot$data
     
-    real_beta <- currentList$real_beta
-    real_alpha <- currentList$real_alpha
-    
-    print(real_beta)
-    print(real_alpha)
-    
     currentPlot <- ggplot(currentPlot_data, aes(x=X, y=Y, colour=sampled)) +
       geom_point(shape=21) +
-      geom_abline(slope = real_beta, intercept = real_alpha) +
-      # geom_abline(slope = currentList$beta_1, intercept = currentList$alpha_1, 
-      #             colour="red", linetype="dashed") +
-      # geom_abline(slope = currentList$beta_2, intercept = currentList$alpha_2, 
-      #             colour="red", linetype="dashed") +
-      # geom_vline(xintercept=c(X_mean_1,X_mean_2),
-      #            colour="blue", linetype="dashed") +
-      # geom_vline(xintercept=c(X_q95_1,X_q95_2),
-      #            colour="blue", linetype="dashed") +
-      # geom_vline(xintercept=real_X_mean, colour="blue") +
-      # geom_vline(xintercept=real_X_q95, colour="blue") +
-      scale_color_continuous(low="mistyrose", high = "#ff0000", limits=c(0,0.65))
-    # ylim(c(0.85*vrai_alpha,vrai_alpha/0.85))
-    # scale_x_continuous(trans=custom_trans, 
-    #                    breaks = c(500,1000,2000,5000,10000,20000))
+      geom_abline(slope = currentList$real_beta, intercept = currentList$real_alpha) +
+      geom_abline(slope = currentList$beta_1, intercept = currentList$alpha_1,
+                  colour="red", linetype="dashed") +
+      geom_abline(slope = currentList$beta_2, intercept = currentList$alpha_2,
+                  colour="red", linetype="dashed") +
+      scale_color_continuous(low="mistyrose", high = "#ff0000", limits=c(0,0.65)) +
+      ylim(c(3600,16200)) +
+      xlim(c(0,15000))
     
 
     if(input$include_CI_mean) {
