@@ -92,9 +92,11 @@ plot_pps_sims_model <- ggplot(df_reduced, aes(x=X, y=Y, colour=sampled)) +
 
   returnList <- list(plot_pps_sims_model, c(X_mean_1,X_mean_2), 
                      c(X_q95_1,X_q95_2), sd_X_mean, sd_X_q95, c(sd_alpha, sd_beta),
-                     mse_X_mean, mse_X_q95, c(mse_alpha, mse_beta))
+                     mse_X_mean, mse_X_q95, c(mse_alpha, mse_beta),
+                     real_beta, real_alpha, beta_1, beta_2, alpha_1, alpha_2)
   names(returnList) <- c("plot","ci_mean","ci_q95","sd_mean","sd_95","sd_param",
-                         "mse_mean","mse_95","mse_param")
+                         "mse_mean","mse_95","mse_param",
+                         "real_beta", "real_alpha", "beta_1", "beta_2", "alpha_1", "alpha_2")
   return(returnList)
 
 }
