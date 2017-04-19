@@ -7,16 +7,24 @@ shinyServer(function(input, output) {
     currentAlpha <- alpha()
     
     indexList <- which.min(abs(seq(0,1,length.out = length(listPlotsArticle)) - currentAlpha))
+    
     currentList <- listPlotsArticle[[indexList]]
     currentPlot_data <- currentList$plot$data
     
+    ## ablines parameters
+    real_beta <- as.numeric(currentList[["real_beta"]])
+    real_alpha <- as.numeric(currentList[["real_alpha"]])
+
+    print(real_beta)
+    print(real_alpha)
+    
     currentPlot <- ggplot(currentPlot_data, aes(x=X, y=Y, colour=sampled)) +
       geom_point(shape=21) +
-      geom_abline(slope = currentList$real_beta, intercept = currentList$real_alpha) +
-      geom_abline(slope = currentList$beta_1, intercept = currentList$alpha_1,
-                  colour="red", linetype="dashed") +
-      geom_abline(slope = currentList$beta_2, intercept = currentList$alpha_2,
-                  colour="red", linetype="dashed") +
+      geom_abline(slope = real_beta, intercept = real_alpha) +
+      # geom_abline(slope = currentList$beta_1, intercept = currentList$alpha_1,
+      #             colour="red", linetype="dashed") +
+      # geom_abline(slope = currentList$beta_2, intercept = currentList$alpha_2,
+      #             colour="red", linetype="dashed") +
       scale_color_continuous(low="mistyrose", high = "#ff0000", limits=c(0,0.65)) +
       ylim(c(3600,16200)) +
       xlim(c(0,15000))
