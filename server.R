@@ -4,27 +4,16 @@ shinyServer(function(input, output) {
 
   output$plot_simus <- renderPlot({
     
-    currentAlpha <- alpha()
-    
-    indexList <- which.min(abs(seq(0,1,length.out = length(listPlotsArticle)) - currentAlpha))
-    
-    currentList <- listPlotsArticle[[indexList]]
+    currentList <- getCurrentList()
     currentPlot_data <- currentList$plot$data
-    
-    ## ablines parameters
-    real_beta <- as.numeric(currentList[["real_beta"]])
-    real_alpha <- as.numeric(currentList[["real_alpha"]])
-
-    print(real_beta)
-    print(real_alpha)
     
     currentPlot <- ggplot(currentPlot_data, aes(x=X, y=Y, colour=sampled)) +
       geom_point(shape=21) +
-      geom_abline(slope = real_beta, intercept = real_alpha) +
-      # geom_abline(slope = currentList$beta_1, intercept = currentList$alpha_1,
-      #             colour="red", linetype="dashed") +
-      # geom_abline(slope = currentList$beta_2, intercept = currentList$alpha_2,
-      #             colour="red", linetype="dashed") +
+      geom_abline(slope = currentList$real_beta, intercept = currentList$real_alpha) +
+      geom_abline(slope = currentList$beta_1, intercept = currentList$alpha_1,
+                  colour="red", linetype="dashed") +
+      geom_abline(slope = currentList$beta_2, intercept = currentList$alpha_2,
+                  colour="red", linetype="dashed") +
       scale_color_continuous(low="mistyrose", high = "#ff0000", limits=c(0,0.65)) +
       ylim(c(3600,16200)) +
       xlim(c(0,15000))
@@ -32,20 +21,20 @@ shinyServer(function(input, output) {
 
     if(input$include_CI_mean) {
       currentPlot <- currentPlot +
-        geom_vline(xintercept=listPlotsArticle[[indexList]]$ci_mean,
+        geom_vline(xintercept=currentList$ci_mean,
                    colour="blue", linetype="dashed")
     }
 
     if(input$include_CI_95) {
       currentPlot <- currentPlot +
-        geom_vline(xintercept=listPlotsArticle[[indexList]]$ci_q95,
+        geom_vline(xintercept=currentList$ci_q95,
                    colour="blue", linetype="dashed")
     }
 
     if(input$scale) {
       currentPlot <- currentPlot +   scale_x_continuous(trans=custom_trans,
            breaks = c(500,1000,2000,5000,10000,20000)) +
-        ylim(c(0.85*real_alpha,real_alpha/0.85))
+        ylim(c(0.85*currentList$real_alpha,currentList$real_alpha/0.85))
     }
 
     currentPlot
@@ -70,13 +59,21 @@ shinyServer(function(input, output) {
       guides(colour=guide_legend(title=NULL)) +
       geom_vline(xintercept = currentAlpha, size=1)
     
-    # plot_mse_local <- plot(df_mse$mu, df_mse$mse95)
     plot_mse_local
     
   })
   
   alpha <- reactive({
     input$alpha
+  })
+  
+  getCurrentList <- reactive({
+    currentAlpha <- alpha()
+    
+    indexList <- which.min(abs(seq(0,1,length.out = length(listPlotsArticle)) - currentAlpha))
+    
+    currentList <- listPlotsArticle[[indexList]]
+    return(currentList)
   })
   
 })
